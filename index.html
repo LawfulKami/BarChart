@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Bars</title>
+</head>
+<body>
+  <script src="barchartscripts.js"></script>
+  <script src="jquery.js"></script>
+  <header>
+  <h1 id="maintitle">~The Bars~</h1>
+  </header>
+
+  <section id="main">
+    <div id="labeling">
+      <form action="">
+        <div><input id="titleInput" type="text" class="labelingForm" placeholder="Title..."></div><br>
+        <div><input id="subtitleInput" type="text" class="labelingForm" placeholder="Subtitle..."></div><br>
+        <div><input id="yaxisInput" type="text" class="labelingForm" placeholder="Y-axis text..."></div><br>
+      </form>
+    </div>
+
+    <div id="graph">
+    <div id="graphTitle">Hello</div>
+    <div id="axis"></div>
+    </div>
+
+    <div id="values">
+    <Label>Your Bars</Label><br>
+    <input type="text" class="item" placeholder="Item...">
+    <input type="text" class="quantity" placeholder="Value...">
+    <br>
+    <input type="text" class="item" placeholder="Item...">
+    <input type="text" class="quantity" placeholder="Value...">
+    <br>
+    <button id="addVal" class="buttons" type="button" value="1">Add a bar</button>
+    </div>
+  </section>
+
+  <section id="options">
+    <div><button id="mainInput">Generate!</button></div>
+  </section>
+  <div id="options"></div>
+</body>
+</html>
