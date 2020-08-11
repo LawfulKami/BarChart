@@ -23,8 +23,10 @@
     </div>
 
     <div id="graph">
-    <div id="graphTitle">Hello</div>
+    <div id="graphTitle">Your Title</div>
+    <div id="graphSubtitle">Your Subtitle</div>
     <div id="axis"></div>
+    <div id="yaxisText">Y-axis text</div>
     </div>
 
     <div id="values">
@@ -35,7 +37,7 @@
     <input type="text" class="item" placeholder="Item...">
     <input type="text" class="quantity" placeholder="Value...">
     <br>
-    <button id="addVal" class="buttons" type="button" value="1">Add a bar</button>
+    <button id="addVal" class="buttons" type="button">Add a bar</button>
     </div>
   </section>
 
@@ -43,5 +45,17 @@
     <div><button id="mainInput">Generate!</button></div>
   </section>
   <div id="options"></div>
+  <script>
+    $ (document).ready(function(){
+      $("#mainInput").on("click", function(){
+        updateLabel()
+        $("#graphTitle").html(labelingForm.title);
+        $("#graphSubtitle").html(labelingForm.subtitle);
+        $("#yaxisText").html(labelingForm.yaxistext);
+      });
+    });
+  </script>
 </body>
+
+
 </html>
