@@ -18,7 +18,7 @@
       <form action="">
         <div><input id="titleInput" type="text" class="labelingForm" placeholder="Title..."></div><br>
         <div><input id="subtitleInput" type="text" class="labelingForm" placeholder="Subtitle..."></div><br>
-        <div><input id="yaxisInput" type="text" class="labelingForm" placeholder="Y-axis text..."></div><br>
+        <div><input id="xAxisInput" type="text" class="labelingForm" placeholder="X-axis text..."></div><br>
       </form>
     </div>
 
@@ -26,16 +26,16 @@
     <div id="graphTitle">Your Title</div>
     <div id="graphSubtitle">Your Subtitle</div>
     <div id="axis"></div>
-    <div id="yaxisText">Y-axis text</div>
+    <div id="xAxisText">X-axis text</div>
     </div>
 
     <div id="values">
     <Label>Your Bars</Label><br>
     <input type="text" class="item" placeholder="Item...">
-    <input type="text" class="quantity" placeholder="Value...">
+    <input id="bar0Value" type="text" class="quantity" placeholder="Value...">
     <br>
     <input type="text" class="item" placeholder="Item...">
-    <input type="text" class="quantity" placeholder="Value...">
+    <input id="bar1Value"type="text" class="quantity" placeholder="Value...">
     <br>
     <button id="addVal" class="buttons" type="button">Add a bar</button>
     </div>
@@ -49,9 +49,12 @@
     $ (document).ready(function(){
       $("#mainInput").on("click", function(){
         updateLabel()
+        updateValue()
+        verifyValue()
         $("#graphTitle").html(labelingForm.title);
         $("#graphSubtitle").html(labelingForm.subtitle);
-        $("#yaxisText").html(labelingForm.yaxistext);
+        $("#xAxisText").html(labelingForm.yaxistext);
+        createBars(document.getElementsByClassName("item"))
       });
     });
   </script>

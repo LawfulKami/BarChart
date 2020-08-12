@@ -137,6 +137,9 @@ body{
   border-color: black;
   width: 400px;
   height: 400px;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-evenly;
   border-width: thick;
   border-top-style: hidden;
   border-right-style: hidden;
@@ -146,7 +149,17 @@ body{
   align-self: center;
 }
 
-#yaxisText{
+.bar{
+  height: auto;
+  width: 400px;
+  background-color: darkred;
+  box-shadow: -2px 0px 5px grey;
+  padding: 5%;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+#xAxisText{
   justify-self: center;
   font-size: 25px;
   margin-bottom: 30px;
