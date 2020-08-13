@@ -37,7 +37,7 @@
     <input type="text" class="item" placeholder="Item...">
     <input id="bar1Value"type="text" class="quantity" placeholder="Value...">
     <br>
-    <button id="addVal" class="buttons" type="button">Add a bar</button>
+    <button id="addVal">Add a bar</button>
     </div>
   </section>
 
@@ -47,6 +47,10 @@
   <div id="options"></div>
   <script>
     $ (document).ready(function(){
+
+      $("#addVal").click(function(){
+        addMoreBars()});
+
       $("#mainInput").on("click", function(){
         updateLabel()
         updateValue()
@@ -54,7 +58,8 @@
         $("#graphTitle").html(labelingForm.title);
         $("#graphSubtitle").html(labelingForm.subtitle);
         $("#xAxisText").html(labelingForm.yaxistext);
-        createBars(document.getElementsByClassName("item"))
+        $("#axis").empty()
+        createBars(document.getElementsByClassName("item"));
       });
     });
   </script>
