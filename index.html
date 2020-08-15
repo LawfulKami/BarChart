@@ -57,7 +57,9 @@
         addMoreBars()});
 
       $("#mainInput").on("click", function(){
+        resetValue()
         updateLabel()
+        updateNames()
         updateValue()
         verifyValue()
         $("#graphTitle").html(labelingForm.title);

@@ -4,7 +4,8 @@ const labelingForm = {
   yaxistext: ""
 };
 
-const arrOfGraphValues = []
+const arrOfGraphValues = [];
+const arrOfBarNames = [];
 
 const CSS_COLOR_NAMES = [
   "AliceBlue",
@@ -16,7 +17,6 @@ const CSS_COLOR_NAMES = [
   "CadetBlue",
   "Chartreuse",
   "Chocolate",
-  "Coral",
   "CornflowerBlue",
   "DarkCyan",
   "DarkGreen",
@@ -43,14 +43,23 @@ function updateLabel(){
   labelingForm.yaxistext = document.getElementById("xAxisInput").value
 };
 
-function  updateValue(){
-  let barValueInput = document.getElementsByClassName("quantity");
+function updateValue(){
+  const barValueInput = document.getElementsByClassName("quantity");
   const barValues = Array.from(barValueInput)
   for (let i = 0; i < barValues.length; i++){
-    arrOfGraphValues.push(barValues[i].value)
+    arrOfGraphValues.push(barValues[i].value);
     arrOfGraphValues[i] = Number(arrOfGraphValues[i])
   }
 };
+
+function updateNames(){
+  let namesInput = document.getElementsByClassName("item");
+  namesInput = Array.from(namesInput);
+  for (let i = 0; i < namesInput.length; i++){
+    arrOfBarNames.push(namesInput[i].value);
+  }
+  console.log(arrOfBarNames);
+}
 
 function verifyValue(){
   let invalid = false;
@@ -68,10 +77,11 @@ for (let point of arrOfGraphValues){
 
 function addMoreBars(){
   let numExistingBar = document.getElementsByClassName("item").length
-  const newBar = "<input type=\"text\" class=\"item\" placeholder=\"Item...\"></input>" +
+  const newBarInput = "<input type=\"text\" class=\"item\" placeholder=\"Item...\"></input>" +
   "\n" + `<input id=\"bar${numExistingBar}Value\" type=\"text\" class=\"quantity\"` +
   "placeholder=\"Value...\">" + "\n" + `<input id=\"colorInput${numExistingBar}\" type=\"button\" class=\"colorSelector\"><br>`;
-  $("#addVal").before(newBar)
+  $("#addVal").before(newBarInput)
+  $(document.getElementById(`colorInput${numExistingBar}`)).css("background-color", getRandomColor())
 }
 
 function createBars(items){
@@ -80,25 +90,31 @@ function createBars(items){
     let bar = document.createElement("div");
     bar.setAttribute("id",`bar${i}`);
     bar.setAttribute("class", "bar");
-    bar.innerHTML = getBarValue(`bar${i}Value`);
+    bar.innerHTML = arrOfGraphValues[i];
+    let itemName = document.createElement("p");
+    itemName.innerHTML = arrOfBarNames[i]
+    itemName.setAttribute("class", "names")
+    let position = (3 + (arrOfBarNames[i].length/2)) + "em";
+    $(itemName).css("right", position)
     $(bar).css("width", function(){
       let ratio = (arrOfGraphValues[i]/Math.max(...arrOfGraphValues)*85) + "%";
       return ratio
     });
     $(bar).css("background-color", $(document.getElementById(`colorInput${i}`)).css("background-color"));
     graph.appendChild(bar);
+    (document.getElementById(`bar${i}`)).appendChild(itemName)
   };
   $(".bar").hide();
   $(".bar").show("slow");
 };
 
-function getBarValue(barId){
-  let value = document.getElementById(barId).value;
-  return value;
-};
 
 function getRandomColor(){
-  let rand = Math.floor(Math.random() * 27);
-  let color = CSS_COLOR_NAMES.splice(rand, 1);
-  return color;
+  let rand = Math.floor(Math.random() * (CSS_COLOR_NAMES.length-1));
+  return CSS_COLOR_NAMES.splice(rand, 1);
+}
+
+function resetValue(){
+  arrOfGraphValues.splice(0, arrOfGraphValues.length);
+  arrOfBarNames.splice(0, arrOfBarNames.length);
 }

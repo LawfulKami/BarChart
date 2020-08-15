@@ -59,7 +59,7 @@ h1 {
 }
 
 body{
-  background-color: grey;
+  background-image: url(background.jpeg);
 }
 
 .labelingForm{
@@ -80,7 +80,6 @@ body{
 }
 
 #values{
-  background-color: lightsteelblue;
   position: sticky;
   float: left;
   margin: 1%;
@@ -104,7 +103,6 @@ body{
 
 #labeling{
   align-self: center;
-  background-color: lightsteelblue;
   float: left;
   width: 200px;
   height: 400px;
@@ -117,7 +115,6 @@ body{
   box-shadow: 5px 5px 2px gray;
   border-style: dotted;
   display: grid;
-
   background-image: url(graphpaper.jpg);
   align-self: center;
   float: left;
@@ -160,12 +157,19 @@ body{
 }
 
 .bar{
+  display: flex;
+  justify-content: right;
   height: auto;
   background-color: darkred;
   box-shadow: 0px 5px 5px grey;
   padding: 5%;
   font-size: 1.5em;
   font-weight: bold;
+  min-width: .001%;
+}
+
+.names{
+  position: relative;
 }
 
 #xAxisText{
@@ -176,7 +180,6 @@ body{
 }
 
 #main{
-  background-color: lightblue;
   display: flex;
   justify-content: center;
   gap: 20px;
