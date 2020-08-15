@@ -33,9 +33,11 @@
     <Label>Your Bars</Label><br>
     <input type="text" class="item" placeholder="Item...">
     <input id="bar0Value" type="text" class="quantity" placeholder="Value...">
+    <input id="colorInput0" type="button" class="colorSelector">
     <br>
     <input type="text" class="item" placeholder="Item...">
     <input id="bar1Value"type="text" class="quantity" placeholder="Value...">
+    <input id="colorInput1" type="button" class="colorSelector">
     <br>
     <button id="addVal">Add a bar</button>
     </div>
@@ -47,6 +49,9 @@
   <div id="options"></div>
   <script>
     $ (document).ready(function(){
+
+      $("#colorInput0").css("background-color", getRandomColor());
+      $("#colorInput1").css("background-color", getRandomColor());
 
       $("#addVal").click(function(){
         addMoreBars()});

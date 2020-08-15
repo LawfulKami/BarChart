@@ -87,6 +87,16 @@ body{
   padding-top: 100px;
 }
 
+.colorSelector{
+  all: unset;
+  height: 0.75em;
+  width: 0.75em;
+  background-color: lightgray;
+  border: black;
+  border-style: solid;
+  border-width: 1px;
+}
+
 #addVal{
   float: right;
   margin-top: 5px;

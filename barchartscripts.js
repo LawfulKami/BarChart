@@ -6,6 +6,37 @@ const labelingForm = {
 
 const arrOfGraphValues = []
 
+const CSS_COLOR_NAMES = [
+  "AliceBlue",
+  "AntiqueWhite",
+  "Aqua",
+  "Blue",
+  "BlueViolet",
+  "Brown",
+  "CadetBlue",
+  "Chartreuse",
+  "Chocolate",
+  "Coral",
+  "CornflowerBlue",
+  "DarkCyan",
+  "DarkGreen",
+  "DarkKhaki",
+  "DarkMagenta",
+  "DarkOrange",
+  "DarkRed",
+  "DarkSalmon",
+  "DarkSeaGreen",
+  "DarkSlateBlue",
+  "DarkSlateGrey",
+  "DarkViolet",
+  "DeepSkyBlue",
+  "DodgerBlue",
+  "Gold",
+  "GreenYellow",
+  "HotPink",
+  "Indigo",
+];
+
 function updateLabel(){
   labelingForm.title = document.getElementById("titleInput").value
   labelingForm.subtitle = document.getElementById("subtitleInput").value
@@ -19,7 +50,6 @@ function  updateValue(){
     arrOfGraphValues.push(barValues[i].value)
     arrOfGraphValues[i] = Number(arrOfGraphValues[i])
   }
-  console.log(arrOfGraphValues)
 };
 
 function verifyValue(){
@@ -38,8 +68,9 @@ for (let point of arrOfGraphValues){
 
 function addMoreBars(){
   let numExistingBar = document.getElementsByClassName("item").length
-  const newBar = "<input type=\"text\" class=\"item\" placeholder=\"Item...\"></input>" + "\n" + `<input id=\"bar${numExistingBar}Value\" type=\"text\" class=\"quantity\"` +
-  "placeholder=\"Value...\"><br>";
+  const newBar = "<input type=\"text\" class=\"item\" placeholder=\"Item...\"></input>" +
+  "\n" + `<input id=\"bar${numExistingBar}Value\" type=\"text\" class=\"quantity\"` +
+  "placeholder=\"Value...\">" + "\n" + `<input id=\"colorInput${numExistingBar}\" type=\"button\" class=\"colorSelector\"><br>`;
   $("#addVal").before(newBar)
 }
 
@@ -53,14 +84,21 @@ function createBars(items){
     $(bar).css("width", function(){
       let ratio = (arrOfGraphValues[i]/Math.max(...arrOfGraphValues)*85) + "%";
       return ratio
-  })
+    });
+    $(bar).css("background-color", $(document.getElementById(`colorInput${i}`)).css("background-color"));
     graph.appendChild(bar);
-  }
-  $(".bar").hide()
-  $(".bar").show("slow")
+  };
+  $(".bar").hide();
+  $(".bar").show("slow");
 };
 
 function getBarValue(barId){
-  let value = document.getElementById(barId).value
-  return value
+  let value = document.getElementById(barId).value;
+  return value;
 };
+
+function getRandomColor(){
+  let rand = Math.floor(Math.random() * 27);
+  let color = CSS_COLOR_NAMES.splice(rand, 1);
+  return color;
+}
