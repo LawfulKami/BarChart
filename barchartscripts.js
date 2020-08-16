@@ -6,8 +6,37 @@ const labelingForm = {
 
 const arrOfGraphValues = [];
 const arrOfBarNames = [];
-
-const CSS_COLOR_NAMES = [
+let colorExamined = "";
+const originalColors = [
+  "AliceBlue",
+  "AntiqueWhite",
+  "Aqua",
+  "Blue",
+  "BlueViolet",
+  "Brown",
+  "CadetBlue",
+  "Chartreuse",
+  "Chocolate",
+  "CornflowerBlue",
+  "DarkCyan",
+  "DarkGreen",
+  "DarkKhaki",
+  "DarkMagenta",
+  "DarkOrange",
+  "DarkRed",
+  "DarkSalmon",
+  "DarkSeaGreen",
+  "DarkSlateBlue",
+  "DarkSlateGrey",
+  "DarkViolet",
+  "DeepSkyBlue",
+  "DodgerBlue",
+  "Gold",
+  "GreenYellow",
+  "HotPink",
+  "Indigo",
+]
+const availableColors = [
   "AliceBlue",
   "AntiqueWhite",
   "Aqua",
@@ -41,6 +70,8 @@ function updateLabel(){
   labelingForm.title = document.getElementById("titleInput").value
   labelingForm.subtitle = document.getElementById("subtitleInput").value
   labelingForm.yaxistext = document.getElementById("xAxisInput").value
+  $(".displayedLabels").css("font-family", document.getElementById("fontSelect").value);
+  $(".displayedLabels").css("color", $("#colorSelectorLabels").css("background-color"))
 };
 
 function updateValue(){
@@ -58,7 +89,6 @@ function updateNames(){
   for (let i = 0; i < namesInput.length; i++){
     arrOfBarNames.push(namesInput[i].value);
   }
-  console.log(arrOfBarNames);
 }
 
 function verifyValue(){
@@ -110,11 +140,68 @@ function createBars(items){
 
 
 function getRandomColor(){
-  let rand = Math.floor(Math.random() * (CSS_COLOR_NAMES.length-1));
-  return CSS_COLOR_NAMES.splice(rand, 1);
-}
+  let rand = Math.floor(Math.random() * (availableColors.length-1));
+  return availableColors.splice(rand, 1);
+};
 
 function resetValue(){
   arrOfGraphValues.splice(0, arrOfGraphValues.length);
   arrOfBarNames.splice(0, arrOfBarNames.length);
-}
+};
+
+//Bar color selector
+
+function showColorSelector(buttonId){
+  $(".palette").remove()
+  createColorPalette(buttonId);
+  $(".palette").hide();
+  $(".palette").show("slow");
+};
+
+
+function createColorPalette(colorButtonId){
+  let palette = document.createElement("div");
+  palette.setAttribute("class", "palette");
+  document.getElementById("values").appendChild(palette);
+  for (let colorOfButton of originalColors){
+    let colorChoice = document.createElement("button");
+    colorChoice.setAttribute("class", "paletteChoice");
+    $(colorChoice).css("background-color", colorOfButton);
+    palette.appendChild(colorChoice);
+  }
+  colorExamined = colorButtonId;
+};
+
+//Font color selector
+
+function showFontColorSelector(){
+  $(".palette").remove()
+  createFontPalette();
+  $(".palette").hide();
+  $(".palette").show("slow");
+};
+
+function createFontPalette(){
+  let palette = document.createElement("div");
+  palette.setAttribute("class", "palette");
+  document.getElementById("labeling").appendChild(palette);
+  for (let colorOfButton of originalColors){
+    let colorChoice = document.createElement("button");
+    colorChoice.setAttribute("class", "paletteChoice");
+    $(colorChoice).css("background-color", colorOfButton);
+    palette.appendChild(colorChoice);
+  }
+  let colorChoice = document.createElement("button");
+  colorChoice.setAttribute("class", "paletteChoice");
+  $(colorChoice).css("background-color", "black");
+  palette.appendChild(colorChoice);
+  colorExamined = "colorSelectorLabels"
+};
+
+//Color applier
+
+function applyColorChoice(newChoice){
+  $(document.getElementById(colorExamined)).css("background-color", newChoice)
+  $(".palette").remove()
+  colorExamined = ""
+};

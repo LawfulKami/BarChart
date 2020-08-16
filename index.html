@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link href="https://fonts.googleapis.com/css?family=Red+Rose|Roboto|Courier Prime|Bebas+Neue|Anton" rel="stylesheet" type="text/css">
   <link rel="stylesheet" type="text/css" href="style.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,13 +21,31 @@
         <div><input id="subtitleInput" type="text" class="labelingForm" placeholder="Subtitle..."></div><br>
         <div><input id="xAxisInput" type="text" class="labelingForm" placeholder="X-axis text..."></div><br>
       </form>
+
+      <button id="labelingOptionsShow">Options</button>
+      <div id="labelingOptions">
+
+        <label for="fontSelect">Select Font:</label>
+        <select name="Font" id="fontSelect">
+          <option value="'Times New Roman', Times, serif;" style="font-family: 'Times New Roman', Times, serif;">Times New Roman</option>
+          <option value="'Red Rose',Times, serif" style="font-family: 'Red Rose'">Red Rose</option>
+          <option value="Roboto, Helvetica, sans-serif" style="font-family: Roboto, Helvetica, sans-serif">Roboto</option>
+          <option value="'Courier Prime', Courier, monospace" style="font-family: 'Courier Prime', Courier, monospace">Courier Prime</option>
+          <option value="Bebas Neue, 'Times New Roman', Times, serif" style="font-family: Bebas Neue, 'Times New Roman', Times, serif">Bebas Neue</option>
+          <option value="'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', sans-serif" style="font-family: 'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', sans-serif">Comic Sans MS</option>
+          <option value="Anton, Haettenschweiler, 'Arial Narrow Bold', sans-serif" style="font-family: Anton, Haettenschweiler, 'Arial Narrow Bold', sans-serif">Anton</option>
+        </select><br>
+
+      <Label for="colorSelect">Select Color:</Label>
+        <button id="colorSelectorLabels"></button>
+      </div>
     </div>
 
     <div id="graph">
-    <div id="graphTitle">Your Title</div>
-    <div id="graphSubtitle">Your Subtitle</div>
+    <div id="graphTitle" class="displayedLabels">Your Title</div>
+    <div id="graphSubtitle" class="displayedLabels">Your Subtitle</div>
     <div id="axis"></div>
-    <div id="xAxisText">X-axis text</div>
+    <div id="xAxisText" class="displayedLabels">X-axis text</div>
     </div>
 
     <div id="values">
@@ -36,7 +55,7 @@
     <input id="colorInput0" type="button" class="colorSelector">
     <br>
     <input type="text" class="item" placeholder="Item...">
-    <input id="bar1Value"type="text" class="quantity" placeholder="Value...">
+    <input id="bar1Value" type="text" class="quantity" placeholder="Value...">
     <input id="colorInput1" type="button" class="colorSelector">
     <br>
     <button id="addVal">Add a bar</button>
@@ -46,9 +65,26 @@
   <section id="options">
     <div><button id="mainInput">Generate!</button></div>
   </section>
-  <div id="options"></div>
+
   <script>
     $ (document).ready(function(){
+
+      $("#labelingOptions").hide()
+      $("#labelingOptionsShow").click(function(){
+        $("#labelingOptions").toggle()
+      })
+
+      $(document).on("click", ".colorSelector", function(){
+        showColorSelector($(this).attr("id"))
+      })
+
+      $(document).on("click", ".paletteChoice", function(){
+        applyColorChoice($(this).css("background-color"))
+      })
+
+      $(document).on("click", "#colorSelectorLabels", function(){
+        showFontColorSelector()
+      })
 
       $("#colorInput0").css("background-color", getRandomColor());
       $("#colorInput1").css("background-color", getRandomColor());
